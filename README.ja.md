@@ -23,7 +23,7 @@ wtw (Worktree Pro for Windows)
   - `.wtp.yml` のフォーマット（`version`, `defaults.base_dir`, `hooks.post_create` など）をそのまま読み込みます。
   - `add`, `list`, `remove`, `cd` の挙動は wtp に極力合わせています。
 - **自動的な worktree パスレイアウト**
-  - 例えば `feature/auth` というブランチ名は、既定では `../worktrees/feature/auth` にマップされます。
+  - 例えば `feature/auth` というブランチ名は、既定では `../worktree/feature/auth` にマップされます。
   - Windows で使えない文字を含むブランチ名はサニタイズされます（例: `feat:bad*name` → `feat_bad_name`）。
 - **post_create hooks による自動セットアップ**
   - `copy` フックで、メイン worktree から `.env` のような gitignore されたファイルをコピーできます。
@@ -69,7 +69,7 @@ GitHub Releases などで配布する想定のアーカイブは次のような�
 ```powershell
 # 1. Releases ページから ZIP をダウンロード
 # 2. 任意のディレクトリに展開（例）
-Expand-Archive -Path .\wtw-0.1.0-x86_64-pc-windows-msvc.zip -DestinationPath C:\tools\wtw
+Expand-Archive -Path .\wtw-0.2.0-x86_64-pc-windows-msvc.zip -DestinationPath C:\tools\wtw
 
 # 3. 展開したディレクトリを PATH に追加（ユーザー環境変数）
 [System.Environment]::SetEnvironmentVariable(
@@ -181,9 +181,9 @@ wtw add --track origin/feature/remote-only
 wtw add -b hotfix/urgent abc1234
 ```
 
-- 既定では、worktree はリポジトリ root から見た `../worktrees` 配下に作成されます。
+- 既定では、worktree はリポジトリ root から見た `../worktree` 配下に作成されます。
 - ブランチ名に `/` が含まれる場合、その区切りごとにディレクトリが切られます  
-  （例: `feature/auth` → `../worktrees/feature/auth`）。
+  （例: `feature/auth` → `../worktree/feature/auth`）。
 
 
 ### worktree を一覧表示する (`list`)
@@ -196,7 +196,7 @@ wtw list
 # PATH                      BRANCH           HEAD     STATUS  UPSTREAM            ABS_PATH
 # ----                      ------           ----     ------  --------            --------
 # @*                        main             c72c7800 clean   origin/main         C:\src\my-project
-# feature/auth              feature/auth     def45678 dirty   origin/feature/auth C:\src\my-project\..\worktrees\feature\auth
+# feature/auth              feature/auth     def45678 dirty   origin/feature/auth C:\src\my-project\..\worktree\feature\auth
 
 # ツールや補完から使いやすい JSON 形式
 wtw list --json
@@ -269,7 +269,7 @@ wtw cd my-project   # リポジトリ名でも指定可能
 version: "1.0"
 defaults:
   # worktree のベースディレクトリ（リポジトリ root からの相対、または絶対パス）
-  base_dir: "../worktrees"
+  base_dir: "../worktree"
 ```
 
 - 相対パスの `base_dir` は Git リポジトリ root を基準に解決されます。
@@ -281,7 +281,7 @@ defaults:
 ```yaml
 version: "1.0"
 defaults:
-  base_dir: "../worktrees"
+  base_dir: "../worktree"
 
 hooks:
   post_create:

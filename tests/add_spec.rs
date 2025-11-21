@@ -64,7 +64,7 @@ fn add_detects_existing_branch_conflicts() {
         .assert()
         .failure()
         .stderr(predicate::str::contains("worktree for branch 'feature/duplicate' already exists"))
-        .stderr(predicate::str::contains("worktrees"));
+        .stderr(predicate::str::contains("worktree"));
 }
 
 #[test]
@@ -86,7 +86,7 @@ fn post_create_hooks_copy_and_command_are_run() {
     repo.write_config(
         r#"version: "1.0"
 defaults:
-  base_dir: worktrees
+  base_dir: worktree
 hooks:
   post_create:
     - type: copy

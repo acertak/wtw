@@ -4,7 +4,7 @@ use std::path::{Path, PathBuf};
 use serde::Deserialize;
 
 pub(crate) const DEFAULT_VERSION: &str = "1.0";
-pub(crate) const DEFAULT_BASE_DIR: &str = "../worktrees";
+pub(crate) const DEFAULT_BASE_DIR: &str = "../worktree";
 
 #[derive(Debug, Clone, Deserialize)]
 pub struct Config {

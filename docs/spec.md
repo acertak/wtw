@@ -36,7 +36,7 @@ tests in this repository. No speculative or planned behavior is described.
 
 - **Base directory (`base_dir`)**  
   The root directory under which WTW manages worktrees by default. It is
-  configured via `.wtp.yml` and defaults to `../worktrees` relative to the
+  configured via `.wtp.yml` and defaults to `../worktree` relative to the
   main repository root.
 
 - **Managed worktree**  
@@ -249,7 +249,7 @@ The effective base directory is `config.resolved_base_dir(main_root)`, where
 uses:
 
 - The configured `defaults.base_dir` when present.
-- The default `../worktrees` when `defaults.base_dir` is absent.
+- The default `../worktree` when `defaults.base_dir` is absent.
 - Relative `base_dir` resolved against `main_root`; absolute `base_dir`
   left as‑is.
 

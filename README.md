@@ -23,7 +23,7 @@ Features
   - Reads the same `.wtp.yml` format (version, `defaults.base_dir`, `hooks.post_create`, …).
   - `add`, `list`, `remove`, `cd` behave very close to wtp.
 - **Automatic worktree layout**
-  - Branch names like `feature/auth` are mapped to `../worktrees/feature/auth` by default.
+  - Branch names like `feature/auth` are mapped to `../worktree/feature/auth` by default.
   - Windows‑forbidden characters in branch names are sanitized (e.g. `feat:bad*name` → `feat_bad_name`).
 - **Post‑create hooks**
   - `copy` hooks to copy files (even gitignored ones like `.env`) from the main worktree.
@@ -69,7 +69,7 @@ Install steps:
 ```powershell
 # 1. Download the ZIP from this repository's “Releases” page
 # 2. Extract it somewhere, for example:
-Expand-Archive -Path .\wtw-0.1.0-x86_64-pc-windows-msvc.zip -DestinationPath C:\tools\wtw
+Expand-Archive -Path .\wtw-0.2.0-x86_64-pc-windows-msvc.zip -DestinationPath C:\tools\wtw
 
 # 3. Add that directory to your PATH (once)
 [System.Environment]::SetEnvironmentVariable(
@@ -180,8 +180,8 @@ wtw add --track origin/feature/remote-only
 wtw add -b hotfix/urgent abc1234
 ```
 
-- By default, worktrees are placed under `../worktrees` relative to the repo root.
-- Branch names with `/` become nested directories (e.g. `feature/auth` → `../worktrees/feature/auth`).
+- By default, worktrees are placed under `../worktree` relative to the repo root.
+- Branch names with `/` become nested directories (e.g. `feature/auth` → `../worktree/feature/auth`).
 
 
 ### List worktrees (`list`)
@@ -194,7 +194,7 @@ wtw list
 # PATH                      BRANCH           HEAD     STATUS  UPSTREAM       ABS_PATH
 # ----                      ------           ----     ------  --------       --------
 # @*                        main             c72c7800 clean   origin/main    C:\src\my-project
-# feature/auth              feature/auth     def45678 dirty   origin/feature/auth C:\src\my-project\..\worktrees\feature\auth
+# feature/auth              feature/auth     def45678 dirty   origin/feature/auth C:\src\my-project\..\worktree\feature\auth
 
 # JSON for tooling or completion
 wtw list --json
@@ -266,7 +266,7 @@ Configuration: .wtp.yml
 version: "1.0"
 defaults:
   # Base directory for worktrees (relative to repo root, or absolute)
-  base_dir: "../worktrees"
+  base_dir: "../worktree"
 ```
 
 - Relative `base_dir` is resolved from the Git repo root.
@@ -278,7 +278,7 @@ defaults:
 ```yaml
 version: "1.0"
 defaults:
-  base_dir: "../worktrees"
+  base_dir: "../worktree"
 
 hooks:
   post_create:

@@ -25,9 +25,9 @@ impl TestRepo {
         run_git(temp.path(), &["add", "README.md"]);
         run_git(temp.path(), &["commit", "-q", "-m", "init"]);
 
-        let worktrees_dir = temp.path().join("worktrees");
+        let worktrees_dir = temp.path().join("worktree");
         fs::create_dir_all(&worktrees_dir).unwrap();
-        let default_config = "version: \"1.0\"\ndefaults:\n  base_dir: worktrees\n";
+        let default_config = "version: \"1.0\"\ndefaults:\n  base_dir: worktree\n";
         fs::write(temp.path().join(".wtp.yml"), default_config).unwrap();
         run_git(temp.path(), &["add", ".wtp.yml"]);
         run_git(temp.path(), &["commit", "-q", "-m", "add wtp config"]);

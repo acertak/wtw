@@ -239,7 +239,7 @@ mod tests {
             let temp = TempDir::new().expect("temp dir");
             let repo_root = temp.path().join("repo");
             fs::create_dir_all(&repo_root).expect("repo root");
-            let base_dir = repo_root.join("worktrees");
+            let base_dir = repo_root.join("worktree");
             fs::create_dir_all(&base_dir).expect("base dir");
             let feature_dir = base_dir.join("feature").join("auth");
             fs::create_dir_all(&feature_dir).expect("feature dir");
